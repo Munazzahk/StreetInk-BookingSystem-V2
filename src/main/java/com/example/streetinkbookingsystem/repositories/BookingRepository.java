@@ -204,9 +204,25 @@ public class BookingRepository {
      * @param bookingId
      */
     public void deleteBooking(int bookingId) {
-        validateBookingExistence(bookingId);
-        String deleteQuery = "DELETE FROM booking WHERE id = ?";
-        jdbcTemplate.update(deleteQuery, bookingId);
+        // Get the client_id associated with the booking
+        // Uses simple array Object[] instead of ArrayList or something else, so it can directly be
+        // substituted (direct mapping instead of dynamic mapping) in SQL queries
+        String getClientIdQuery = "SELECT client_id FROM booking WHERE id = ?";
+        Integer clientId = jdbcTemplate.queryForObject(getClientIdQuery, new Object[]{bookingId}, Integer.class);
+
+        // Delete the booking
+        String deleteBookingQuery = "DELETE FROM booking WHERE id = ?";
+        jdbcTemplate.update(deleteBookingQuery, bookingId);
+
+        // Check if the client has any other bookings
+        String checkClientBookingsQuery = "SELECT COUNT(*) FROM booking WHERE client_id = ?";
+        int remainingBookings = jdbcTemplate.queryForObject(checkClientBookingsQuery, new Object[]{clientId}, Integer.class);
+
+        // Delete the client if they have no other bookings
+        if (remainingBookings == 0) {
+            String deleteClientQuery = "DELETE FROM client WHERE id = ?";
+            jdbcTemplate.update(deleteClientQuery, clientId);
+        }
     }
 
     /**
