@@ -78,8 +78,7 @@ public class ClientService {
      * @param clientId client id to delete
      */
     public void deleteClientInfoByClientId(int clientId) {
-        clientRepository.updateClient("Unknown", null, "unknown",
-                0, null, clientId);
+        clientRepository.deleteClient(clientId);
     }
 
     /**
@@ -117,7 +116,7 @@ public class ClientService {
         List<Client> inactiveClientIds = clientRepository.findInactivateClients();
         if (inactiveClientIds != null) {
             for (Client client : inactiveClientIds) {
-                updateClient("Unknown", null, "unknown", 0, null, client.getId());
+                deleteClientInfoByClientId(client.getId());
             }
         }
     }

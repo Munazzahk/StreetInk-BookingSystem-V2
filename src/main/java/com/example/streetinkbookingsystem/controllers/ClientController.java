@@ -275,7 +275,7 @@ public class ClientController {
     public String deleteClient(Model model, HttpSession session, @RequestParam("clientId") int clientId) {
         loginService.addLoggedInUserInfo(model, session, tattooArtistService);
         clientService.deleteClientInfoByClientId(clientId);
-        return "redirect:/client?clientId=" + clientId;
+        return "redirect:/dashboard";
     }
 
     /**

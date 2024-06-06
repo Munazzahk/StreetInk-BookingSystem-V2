@@ -22,6 +22,9 @@ public class ClientRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    BookingRepository bookingRepository;
+
     public Client getClientFromClientId(int clientId) {
         String query = "SELECT * FROM client WHERE id = ?";
         RowMapper<Client> rowMapper = new BeanPropertyRowMapper<>(Client.class);
@@ -103,6 +106,19 @@ public class ClientRepository {
             return jdbcTemplate.query(query, rowMapper);
         } catch (EmptyResultDataAccessException e) {
             return null;
+        }
+    }
+
+    public void deleteClient(int clientId) {
+        String updateBookingsQuery = "UPDATE booking SET client_id = ? WHERE client_id = ?";
+        String deleteClientQuery = "DELETE FROM client WHERE id = ?";
+
+        try {
+            jdbcTemplate.update(updateBookingsQuery, 1, clientId);
+            jdbcTemplate.update(deleteClientQuery, clientId);
+
+        } catch (EmptyResultDataAccessException e) {
+            System.out.println("Client not found.");
         }
     }
 
