@@ -256,10 +256,11 @@ public class BookingController {
      */
     @GetMapping("/save-booking")
     public String saveBooking(@RequestParam int bookingId, HttpSession session,
-                              @RequestParam String date) {
+                              @RequestParam String date, RedirectAttributes redirectAttributes) {
         String username = (String) session.getAttribute("username");
-        emailService.sendConfirmationMail(bookingId, username);
-
+        String message = emailService.sendConfirmationMail(bookingId, username);
+        System.out.println(message);
+        redirectAttributes.addFlashAttribute("message", message);
         return "redirect:/day?date=" + date;
     }
 

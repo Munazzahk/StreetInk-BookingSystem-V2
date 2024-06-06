@@ -130,7 +130,7 @@
             <p style="font-weight: bold">Dato: <span style="font-weight: normal" th:text="${BookingDate}"></span></p>
             <p style="font-weight: bold">Tid: <span style="font-weight: normal"th:text="${BookingStart + ' - ' + BookingEnd}"></span></p>
             <p style="font-weight: bold">Tatovør: <span style="font-weight: normal"th:text="${ArtistFirstName + ' ' + ArtistLastName}"></span></p>
-            <p style="font-weight: bold">Adresse: <p style="font-weight: normal">Mortzartsvej 13, 2450 kbh SV</p></p>
+            <p style="font-weight: bold">Adresse: <span style="font-weight: normal">Mozartsvej 13, 2450 kbh SV</span></p>
             <br>
             <p style="font-weight: bold">Tatovering beskrivelse: <span style="font-weight: normal"th:text="${BookingTitle}"></span></p>
             <p th:text="${BookingDescription}"></p>
@@ -182,9 +182,8 @@
         <p style="font-weight: bold">Tatovør: <span style="font-weight: normal" th:text="${ArtistFirstName + ' ' + ArtistLastName}"></span></p>
         <p style="font-weight: bold">Telefon: <span style="font-weight: normal"th:text="${ArtistPhone}"></span></p>
         <p style="font-weight: bold">Email: <span style="font-weight: normal"th:text="${ArtistEmail}"></span></p>
-        <p th:if="${ArtistInstagram}" style="font-weight: bold">Instagram: <span style="font-weight: normal"th:text="${ArtistInstagram}"></span></p>
-        <p th:if="${ArtistFacebook}" style="font-weight: bold">Facebook: <span style="font-weight: normal"th:text="${ArtistFacebook}"></span></p>
-    </div>
+        <a th:if="${ArtistInstagram}"  th:href="${ArtistInstagram}" style="font-weight: bold">Instagram</a>
+        <a th:if="${ArtistFacebook}"  th:href="${ArtistFacebook}" style="font-weight: bold">Facebook</a> </div>
 
     <p style="font-weight: bold">**OBS: Denne email kan ikke besvares.</p>
    <br>
@@ -193,6 +192,7 @@
 
 </article>
     <div class="divider"></div>
+<hr>
 
 <article>
     <h1>Your booking has been confirmed!</h1>
@@ -213,7 +213,7 @@
             <p style="font-weight: bold">Date: <span style="font-weight: normal" th:text="${BookingDate}"></span></p>
             <p style="font-weight: bold">Time: <span style="font-weight: normal"th:text="${BookingStart + ' - ' + BookingEnd}"></span></p>
             <p style="font-weight: bold">Tattoo Artist: <span style="font-weight: normal"th:text="${ArtistFirstName + ' ' + ArtistLastName}"></span></p>
-            <p style="font-weight: bold">Address: <p style="font-weight: normal">Mortzartsvej 13, 2450 kbh SV</p></p>
+            <p style="font-weight: bold">Address: <span style="font-weight: normal">Mozartsvej 13, 2450 kbh SV</span></p>
             <br>
             <p style="font-weight: bold">Tattoo description: <span style="font-weight: normal"th:text="${BookingTitle}"></span></p>
             <p th:text="${BookingDescription}"></p>
@@ -266,8 +266,8 @@
         <p style="font-weight: bold">Tattoo Artist: <span style="font-weight: normal" th:text="${ArtistFirstName + ' ' + ArtistLastName}"></span></p>
         <p style="font-weight: bold">Phone: <span style="font-weight: normal"th:text="${ArtistPhone}"></span></p>
         <p style="font-weight: bold">Email: <span style="font-weight: normal"th:text="${ArtistEmail}"></span></p>
-        <p th:if="${ArtistInstagram}" style="font-weight: bold">Instagram: <span style="font-weight: normal"th:text="${ArtistInstagram}"></span></p>
-        <p th:if="${ArtistFacebook}" style="font-weight: bold">Facebook: <span style="font-weight: normal"th:text="${ArtistFacebook}"></span></p>
+        <a th:if="${ArtistInstagram}"  th:href="${ArtistInstagram}" style="font-weight: bold">Instagram</a>
+        <a th:if="${ArtistFacebook}"  th:href="${ArtistFacebook}" style="font-weight: bold">Facebook</a>
     </div>
 
     <p style="font-weight: bold">**NOTE: This email cannot be replied to</p>

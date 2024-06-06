@@ -14,7 +14,10 @@
     <div class="back-arrow-container">
         <a th:href="@{/calendar(username=${tattooArtist.getUsername()},year=${date.getYear()},month=${date.getMonthValue()})}" class="small button"><i class="fas fa-arrow-left"></i></a>
     </div>
-
+    <!-- Display mail message if present -->
+    <div th:if="${message!=null}" class="mail-message">
+        <p th:text="${message}"></p>
+    </div>
     <!-- prev and next buttons -->
     <div class="day-navigation">
         <form class="previous" th:action="@{/day/previous(username=${username},date=${date})}" method="post">

@@ -157,3 +157,18 @@ p {
     text-decoration: none;
     font-size: 2rem;
 }
+.mail-message {
+    width: auto;
+    background-color: gray;
+    color: #333333;
+    padding: 1em;
+    border-radius: 1em;
+    display: flex;
+    position: absolute;
+    right: 50%;
+    height: auto;
+}
+.mail-message p {
+    color: var(--white);
+    font-size: 1em;
+}

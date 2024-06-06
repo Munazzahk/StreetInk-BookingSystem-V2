@@ -4,6 +4,7 @@ import com.example.streetinkbookingsystem.models.Booking;
 import com.example.streetinkbookingsystem.models.Client;
 import com.example.streetinkbookingsystem.models.TattooArtist;
 import com.example.streetinkbookingsystem.repositories.TattooArtistRepository;
+import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ import java.util.regex.Pattern;
       * @param bookingId The ID of the booking
      * @param username The username of the tattoo artist
      */
-    public void sendConfirmationMail(int bookingId, String username) {
+    public String sendConfirmationMail(int bookingId, String username) {
         // Retrieve booking details based on the booking ID
         Booking booking = bookingService.getBookingDetail(bookingId);
 
@@ -85,9 +86,16 @@ import java.util.regex.Pattern;
         };
 
         // Send the email
-        javaMailSender.send(preparator);
+        try {
+            javaMailSender.send(preparator);
+            return "Mail sent successfully";
+        } catch (MailException mailException) {
+            return "Booking is saved. Unfortunately there was an error sending the email confirmation. Please try again later." +
+                    " If the problem persists, check your mail account.";
+        } catch (Exception e) {
+            return "An unexpected error occurred. Please try again later.";
+        }
     }
-
 
     /**
      * @author Nanna og Munazzah
@@ -95,6 +103,7 @@ import java.util.regex.Pattern;
      * @param subject The subject of the email
      * @param content The content of the email
      */
+
     public void sendEmail(String recipient, String subject, String content) {
         SimpleMailMessage message = new SimpleMailMessage();
 
@@ -123,5 +132,7 @@ import java.util.regex.Pattern;
 
         return matcher.matches() && tattooArtistRepository.getEmail(username).equals(email);
     }
+
+
 
 }
