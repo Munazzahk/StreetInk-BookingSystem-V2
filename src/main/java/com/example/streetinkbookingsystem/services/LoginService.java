@@ -77,7 +77,6 @@ public class LoginService {
      * @return The hashed password as a string
      */
     public String hashPassword(String password) {
-        System.out.println("hash password metode:");
         try {
             //Generates random characters - the salt part
             SecureRandom random = new SecureRandom();
@@ -109,7 +108,6 @@ public class LoginService {
      * @return Boolean if they match or not
      */
     public boolean verifyPassword(String password, String hashedPassword) {
-        System.out.println("verify method:");
         try {
             //Decodes and extracts the original salt, so we know what the salt is
             byte[] decodedHashedPassword = Base64.getDecoder().decode(hashedPassword);
@@ -169,36 +167,17 @@ public class LoginService {
      */
     //Method that uses the combined salt and password and hashes it
     private byte[] saltAndHash(String password, byte[] salt) throws NoSuchAlgorithmException {
-        System.out.println("saltandHash metode: ");
         //Combines the salt and password length together to create a new byte array
         byte[] saltedPassword = new byte[salt.length + password.getBytes().length];
-        System.out.print("Empty salt: ");
-        for (byte b : saltedPassword) {
-            System.out.print(b + " ");
-        }
-        System.out.println();
+
         //Basically converts the salt and password to a single byte array before hashing
         //First line copies the bytes of the salt in the beginning in saltedPassword
         //Second line copies the bytes of the password and places it just after the salt in the new byte
         System.arraycopy(salt, 0, saltedPassword, 0, salt.length);
-        System.out.print("only salt: ");
-        for (byte b : saltedPassword) {
-            System.out.print((char) b + " ");
-        }
-        System.out.println();
         System.arraycopy(password.getBytes(), 0, saltedPassword, salt.length, password.getBytes().length);
-        System.out.print("salt + password: ");
-        for (byte b : saltedPassword) {
-            System.out.print((char) b+ " ");
-        }
-        System.out.println();
+
         //Hashes the whole byte array using the chosen algorithm
         MessageDigest md = MessageDigest.getInstance("SHA-256");
-        System.out.print("hashed password: ");
-        for (byte b : (md.digest(saltedPassword))) {
-            System.out.print((char) b + " ");
-        }
-        System.out.println();
         return md.digest(saltedPassword);
     }
 

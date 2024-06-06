@@ -10,7 +10,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 public class GlobalExceptionHandler {
 
     // Handle all exceptions
-    /*
+
     @ExceptionHandler(Exception.class)
     public ModelAndView handleAllExceptions(Exception ex) {
         ModelAndView modelAndView = new ModelAndView("home/custom-error");
@@ -18,7 +18,6 @@ public class GlobalExceptionHandler {
                 " If the problem persists, then please contact the developers.");
         return modelAndView;
     }
-    */
 
 }
 
