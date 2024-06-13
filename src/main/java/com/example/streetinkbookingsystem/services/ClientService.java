@@ -116,7 +116,7 @@ public class ClientService {
         List<Client> inactiveClientIds = clientRepository.findInactivateClients();
         if (inactiveClientIds != null) {
             for (Client client : inactiveClientIds) {
-                deleteClientInfoByClientId(client.getId());
+                clientRepository.deleteClient(client.getId());
             }
         }
     }
