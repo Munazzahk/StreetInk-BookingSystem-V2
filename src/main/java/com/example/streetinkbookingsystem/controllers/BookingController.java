@@ -55,11 +55,11 @@ public class BookingController {
      *         If the user is not logged in, it redirects to the home page.
      */
     @GetMapping("/booking")
-            public String booking(Model model, HttpSession session, @RequestParam int bookingId,
-                                  @RequestParam(required = false) Integer bookingIdToDelete) {
-                // Check if the user is logged in
-                if (!loginService.isUserLoggedIn(session)) {
-                    return "redirect:/";
+    public String booking(Model model, HttpSession session, @RequestParam int bookingId,
+                          @RequestParam(required = false) Integer bookingIdToDelete) {
+        // Check if the user is logged in
+        if (!loginService.isUserLoggedIn(session)) {
+            return "redirect:/";
         }
 
         // Add logged-in user information to the model
