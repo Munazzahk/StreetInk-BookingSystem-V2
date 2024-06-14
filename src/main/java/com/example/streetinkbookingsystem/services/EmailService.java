@@ -89,11 +89,10 @@ import java.util.regex.Pattern;
         try {
             javaMailSender.send(preparator);
             return "Mail sent successfully";
-        } catch (MailException mailException) {
-            return "Booking is saved. Unfortunately there was an error sending the email confirmation. Please try again later." +
-                    " If the problem persists, check your mail account.";
         } catch (Exception e) {
-            return "An unexpected error occurred. Please try again later.";
+            return "Booking is saved. Unfortunately there was an error sending the email confirmation. " +
+                    "Please try again later." +
+                    " If the problem persists, check your mail account.";
         }
     }
 
